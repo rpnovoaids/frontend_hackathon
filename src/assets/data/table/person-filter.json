@@ -1,0 +1,17 @@
+{
+    "data": [
+        "kind_person",
+        "identificationType",
+        "identification_number",
+        "name",
+        "first_surname",
+        "second_surname",
+        "business_name",
+        "birthday",
+        "gender",
+        "address",
+        "first_phone",
+        "second_phone",
+        "state"
+    ]
+}

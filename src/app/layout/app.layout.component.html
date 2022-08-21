@@ -1,0 +1,25 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+    <app-topbar></app-topbar>
+    <div class="layout-sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-main">
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
+    </div>
+    <app-config></app-config>
+    <div class="layout-mask"></div>
+</div>
+
+<ng-snotify style="z-index: 1000000;"></ng-snotify>
+<ngx-spinner type="ball-fussion"><p style="margin-top: 15px; font-size: 16px; color: white">Cargando...</p></ngx-spinner>
+<p-toast [style]="{marginTop: '40px'}" [baseZIndex]="1000000"></p-toast>
+<p-dialog header="¡Has estado inactivo!" [(visible)]="display" [modal]="true" [dismissableMask]="true">
+    <p>{{idleState}}</p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="stay()" label="Permanecer" class="ui-button-success"></button>
+        <button type="button" pButton icon="pi pi-close" (click)="logout()" label="Cerrar sesión" class="ui-button-danger"></button>
+    </p-footer>
+</p-dialog>

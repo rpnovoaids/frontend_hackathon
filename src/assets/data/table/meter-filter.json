@@ -1,0 +1,8 @@
+{
+    "data": [
+        "meter_types_id",
+        "meter_number",
+        "meter_status",
+        "state"
+    ]
+}

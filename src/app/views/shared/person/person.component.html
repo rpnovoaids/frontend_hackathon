@@ -1,0 +1,126 @@
+<p-dialog [header]="(!person.id ? 'Registrar' : 'Actualizar') + ' Cliente'" [(visible)]="displayDialogPerson"
+          [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+    <form #ngFormPerson="ngForm" (ngSubmit)="onSubmit()" class="card-body">
+        <div class="p-fluid">
+            <div class="grid">
+                <div class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="kind_person">Tipo Persona</label>
+                    <p-dropdown id="kind_person" name="kind_person" [options]="kindPersons"
+                                optionLabel="header" [(ngModel)]="kindPerson"
+                                (onChange)="onChangeKindPerson($event.value)"></p-dropdown>
+                </div>
+
+                <div class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="identificationType">Tipo Documento</label>
+                    <p-dropdown id="identificationType" name="identificationType"
+                                [options]="identificationTypes" optionLabel="name"
+                                [(ngModel)]="person.identificationType"
+                                (onChange)="onChangeIdentificationType($event.value)"></p-dropdown>
+                </div>
+
+                <div class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="identification_number">Num. Documento</label>
+                    <div class="p-inputgroup">
+                        <input #number="ngModel" pInputText id="identification_number"
+                               name="identification_number"
+                               [(ngModel)]="person.identification_number"
+                               minlength="{{person.identificationType?.number_digits}}"
+                               maxlength="{{person.identificationType?.number_digits}}" type="text"
+                               [required]="requiredIdentificationNumber" (keyup.enter)="onClickSearch(number)"/>
+                        <button type="button" pButton pRipple icon="pi pi-search"
+                                (click)="onClickSearch(number)"></button>
+                    </div>
+                </div>
+
+                <div *ngIf="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                     class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="name">Nombre</label>
+                    <input pInputText id="name" name="name" [(ngModel)]="person.name"
+                           [required]="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                           type="text"/>
+                </div>
+
+                <div *ngIf="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                     class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="first_surname">Apellido Paterno</label>
+                    <input pInputText id="first_surname" name="first_surname"
+                           [(ngModel)]="person.first_surname"
+                           [required]="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                           type="text"/>
+                </div>
+
+                <div *ngIf="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                     class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="second_surname">Apellido Materno</label>
+                    <input pInputText id="second_surname" name="second_surname"
+                           [(ngModel)]="person.second_surname"
+                           [required]="person.kind_person != 'J' && person.identificationType?.code != '06'"
+                           type="text"/>
+                </div>
+
+                <div
+                    *ngIf="person.identificationType?.code == '06'
+                            || (person.kind_person == 'J' && person.identificationType?.code == '13')"
+                    class="field col-12">
+                    <label htmlFor="business_name">Razon Social</label>
+                    <input pInputText id="business_name" name="business_name"
+                           [(ngModel)]="person.business_name"
+                           [required]="person.identificationType?.code == '06'
+                                   || (person.kind_person == 'J' && person.identificationType?.code == '13')"
+                           type="text"/>
+                </div>
+
+                <div class="field col-12">
+                    <label htmlFor="address">Dirección</label>
+                    <input pInputText id="address" name="address" [(ngModel)]="person.address"
+                           type="text" required/>
+                </div>
+
+                <div *ngIf="person.kind_person != 'J'" class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="birthday">Fecha de Nacimiento</label>
+                    <p-calendar id="birthday" name="birthday" [(ngModel)]="person.birthday"
+                                [required]="person.kind_person != '06'"
+                                dateFormat="dd/mm/yy" inputId="dateformat"></p-calendar>
+                </div>
+
+                <div *ngIf="person.kind_person != 'J'" class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="gender">Genero</label>
+                    <p-dropdown id="gender" name="gender" [options]="genders" optionLabel="header"
+                                placeholder="Seleccione" [(ngModel)]="gender"
+                                [required]="person.kind_person != '06'"
+                                (onChange)="onChangeGender($event.value)"></p-dropdown>
+                </div>
+
+                <div class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="first_phone">Teléfono Principal</label>
+                    <p-inputMask id="first_phone" name="first_phone" [(ngModel)]="person.first_phone"
+                                 mask="999 999 999" placeholder="999 999 999"
+                                 [required]="true"></p-inputMask>
+                </div>
+
+                <div class="field col-12 md:col-4 sm:col-6">
+                    <label htmlFor="second_phone">Teléfono Secundario</label>
+                    <p-inputMask id="second_phone" name="second_phone" [(ngModel)]="person.second_phone"
+                                 mask="999 999 999" placeholder="999 999 999"></p-inputMask>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button (click)="displayDialogPerson = false" pButton pRipple type="button" label="Cancelar"
+                    icon="pi pi-times"
+                    class="p-button-outlined p-button-danger mr-2 mb-2"></button>
+            <button [disabled]="!ngFormPerson.valid" pButton pRipple type="submit" label="Guardar"
+                    icon="pi pi-check" class="p-button-success mr-2 mb-2" style="float: right"></button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog #cd [style]="{width: '30vw'}" [baseZIndex]="10000"
+                 rejectButtonStyleClass="p-button-text">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="p-button-outlined"
+                (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>

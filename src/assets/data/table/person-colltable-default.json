@@ -1,0 +1,29 @@
+{
+    "data": [
+        {
+            "field": "kind_person",
+            "header": "Tipo Persona",
+            "placeholder": "Tipo de Persona"
+        },
+        {
+            "field": "identificationType",
+            "header": "Tipo Doc.",
+            "placeholder": "Tipo de Doc."
+        },
+        {
+            "field": "identification_number",
+            "header": "Número de Doc.",
+            "placeholder": "Número de Doc."
+        },
+        {
+            "field": "business_name",
+            "header": "Razon Social",
+            "placeholder": "Razon Social"
+        },
+        {
+            "field": "created_at",
+            "header": "Fecha de Registro",
+            "placeholder": "Fecha de Registro"
+        }
+    ]
+}

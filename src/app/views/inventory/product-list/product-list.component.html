@@ -1,0 +1,90 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="flex align-items-center justify-content-between mb-0">
+                    <h5 class="card-title">Lista de Productos</h5>
+                    <button pButton label="Agregar" class="p-button-outlined mb-2" icon="pi pi-push"
+                            (click)="onDisplayDialogMeter(null)"></button>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <p-table #dt [value]="meters" [columns]="selectedMeterColumns" [(selection)]="selectedMeters"
+                         dataKey="id"
+                         styleClass="p-datatable-customers" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+                         [rowsPerPageOptions]="[10,25,50]" [loading]="loading" responsiveLayout="scroll"
+                         [paginator]="true"
+                         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+                         [filterDelay]="0" [globalFilterFields]="meterFilter">
+                    <ng-template pTemplate="caption">
+
+                        <div class="flex justify-content-between flex-column sm:flex-row">
+                            <button pButton label="Limpiar filtros" class="p-button-outlined mb-2"
+                                    icon="pi pi-filter-slash"
+                                    (click)="onClickClear(dt)"></button>
+                            <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt, $event)"
+                               placeholder="¿Qué estas buscando?" class="w-full"/>
+                    </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                                <div class="flex justify-content-between align-items-center">
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                    <p-columnFilter type="text" [field]="col.field" display="menu"
+                                                    [placeholder]="col.pleaceholder"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="rowData" class="p-selectable-row">
+                            <td>
+                                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                            </td>
+                            <td *ngFor="let col of columns; let i = index" [ngSwitch]="col.field">
+                                <span class="p-column-title">{{col.header}}</span>
+                                <div *ngSwitchDefault>{{ rowData[col.field] }}</div>
+                                <div *ngSwitchCase="'meterType'">{{ rowData['meterType']['name'] }}</div>
+                                <div *ngSwitchCase="'state'">{{ rowData[col.field] != false ? 'SI' : 'NO' }}</div>
+                                <div *ngSwitchCase="'created_at'">
+                                    {{ _HelperService.formatTimToDateSpanish(rowData[col.field]) }}</div>
+                                <div *ngSwitchCase="'updated_at'">
+                                    {{ _HelperService.formatTimToDateSpanish(rowData[col.field]) }}</div>
+                            </td>
+                            <td>
+                                <div class="p-action-button">
+                                    <button pButton icon="pi pi-pencil" (click)="onDisplayDialogMeter(rowData)"
+                                            class="p-button-info"></button>
+                                    <button pButton icon="pi pi-trash" (click)="onClickDestroyMeter(rowData)"
+                                            class="p-button-danger"></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td [colSpan]="selectedMeterColumns.length + 2">No se encontraron registros.</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="loadingbody">
+                        <tr>
+                            <td colspan="7">Cargando datos. Espere por favor.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-product (emitMeter)="getMeter($event)"></app-product>

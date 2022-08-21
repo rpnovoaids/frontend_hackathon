@@ -1,0 +1,29 @@
+{
+    "data": [
+        {
+            "field": "meterType",
+            "header": "Tipo de Medidor",
+            "placeholder": "Tipo de Medidor"
+        },
+        {
+            "field": "meter_number",
+            "header": "Número de Medidor",
+            "placeholder": "Número de Medidor"
+        },
+        {
+            "field": "meter_status",
+            "header": "Estado",
+            "placeholder": "Estado"
+        },
+        {
+            "field": "created_at",
+            "header": "Fecha de Registro",
+            "placeholder": "Fecha de Registro"
+        },
+        {
+            "field": "updated_at",
+            "header": "Ultima Modificaión",
+            "placeholder": "F. de Ultima Modificación"
+        }
+    ]
+}

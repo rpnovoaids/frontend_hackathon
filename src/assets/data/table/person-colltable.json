@@ -1,0 +1,79 @@
+{
+    "data": [
+        {
+            "field": "kind_person",
+            "header": "Tipo Persona",
+            "placeholder": "Tipo de Persona"
+        },
+        {
+            "field": "identificationType",
+            "header": "Tipo Doc.",
+            "placeholder": "Tipo de Doc."
+        },
+        {
+            "field": "identification_number",
+            "header": "Número de Doc.",
+            "placeholder": "Número de Doc."
+        },
+        {
+            "field": "name",
+            "header": "Nombre",
+            "placeholder": "Nombre"
+        },
+        {
+            "field": "first_surname",
+            "header": "Ape. Paterno",
+            "placeholder": "Ape. Paterno"
+        },
+        {
+            "field": "second_surname",
+            "header": "Ape. Materno",
+            "placeholder": "Ape. Materno"
+        },
+        {
+            "field": "business_name",
+            "header": "Razon Social",
+            "placeholder": "Razon Social"
+        },
+        {
+            "field": "birthday",
+            "header": "Fecha de Nacimiento",
+            "placeholder": "Fecha de Nacimiento"
+        },
+        {
+            "field": "gender",
+            "header": "Género",
+            "placeholder": "Género"
+        },
+        {
+            "field": "address",
+            "header": "Dirección",
+            "placeholder": "Dirección"
+        },
+        {
+            "field": "first_phone",
+            "header": "Tel. Principal",
+            "placeholder": "Tel. Principal"
+        },
+        {
+            "field": "second_phone",
+            "header": "Tel. Secundario",
+            "placeholder": "Tel. Secundario"
+        },
+        {
+            "field": "state",
+            "header": "¿Eliminado?",
+            "placeholder": "estado Eliminado"
+        },
+        {
+            "field": "created_at",
+            "header": "Fecha de Registro",
+            "placeholder": "Fecha de Registro"
+        },
+        {
+            "field": "updated_at",
+            "header": "Ultima Modificaión",
+            "placeholder": "F. de Ultima Modificación"
+        }
+    ]
+}

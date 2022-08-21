@@ -1,0 +1,49 @@
+<p-dialog [header]="(!meter.id ? 'Registrar' : 'Actualizar') + ' Medidor'" [(visible)]="displayDialogMeter"
+          [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+    <form #ngFormMeter="ngForm" (ngSubmit)="onSubmit()" class="card-body">
+        <div class="p-fluid">
+            <div class="grid">
+                <div class="field col-12 md:col-6 sm:col-12">
+                    <label htmlFor="meterType">Tipo de Medidor</label>
+                    <p-dropdown id="meterType" name="meterType" [options]="meterTypes" optionLabel="name"
+                                [(ngModel)]="meter.meterType" [required]="true"></p-dropdown>
+                </div>
+
+
+                <div class="field col-12 md:col-6 sm:col-12">
+                    <label htmlFor="identification_number">Num. de Medidor</label>
+                    <div class="p-inputgroup">
+                        <input #number="ngModel" pInputText id="meter_number" name="meter_number"
+                               [(ngModel)]="meter.meter_number" (keyup.enter)="onClickSearch(number)"
+                               minlength="8" type="text" required/>
+                        <button type="button" pButton pRipple icon="pi pi-search"
+                                (click)="onClickSearch(number)"></button>
+                    </div>
+                </div>
+
+                <div class="field col-12 md:col-6 sm:col-12">
+                    <label htmlFor="meter_status">Estado del Medidor</label>
+                    <p-dropdown id="meter_status" name="meter_status" [options]="meterStatus"
+                                [(ngModel)]="meter.meter_status" [required]="true"></p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer" style="padding-top: 5rem;">
+            <button (click)="displayDialogMeter = false" pButton pRipple type="button" label="Cancelar"
+                    icon="pi pi-times"
+                    class="p-button-outlined p-button-danger mr-2 mb-2"></button>
+            <button [disabled]="!ngFormMeter.valid" pButton pRipple type="submit" label="Guardar"
+                    icon="pi pi-check" class="p-button-success mr-2 mb-2" style="float: right"></button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog #cd [style]="{width: '30vw'}" [baseZIndex]="10000"
+                 rejectButtonStyleClass="p-button-text">
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="p-button-outlined"
+                (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
